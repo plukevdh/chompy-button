@@ -7,12 +7,13 @@ require('dot-env');
 
 let userId = process.env.SLACK_USER;
 let chompyHost = process.env.CHOMPY_HOST;
+let channel = process.env.NOTIFY_CHANNEL;
 
 export function handler(event, context) {
   request.post({
       url: chompyHost + '/api/users/' + userId + '/toggle',
       json: true,
-      body: { status: "from iot button!" }
+      body: { status: "from iot button!", notify_channel: channel }
     },
     function(error, response, body) {
       if(error) {
